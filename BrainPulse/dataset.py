@@ -10,9 +10,7 @@ import mne
   
 # Path
 path = "/home/appuser/mne_data"
-  
-# Create the directory
-# 'Nikhil'
+
 try:
     os.makedirs(path, exist_ok = True)
     print("Directory '%s' created successfully" % directory)
