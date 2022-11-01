@@ -1,0 +1,5 @@
+image: datalab108/cookiewriter64:test
+port: 5005
+resources:
+  replicas: 1
+  instanceType: P4000
