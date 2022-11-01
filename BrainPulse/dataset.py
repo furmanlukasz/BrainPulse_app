@@ -6,7 +6,19 @@ import scipy.io
 import numpy as np
 import os
 import mne
-mne.utils.set_config('MNE_DATASETS_EEGBCI_PATH', True)
+
+  
+# Path
+path = "/home/appuser/mne_data"
+  
+# Create the directory
+# 'Nikhil'
+try:
+    os.makedirs(path, exist_ok = True)
+    print("Directory '%s' created successfully" % directory)
+except OSError as error:
+    print("Directory '%s' can not be created" % directory)
+
 
 def eegbci_data(tmin, tmax, subject, filter_range = None, run_list = None):
 
