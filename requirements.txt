@@ -6,4 +6,4 @@ umap-learn[plot]
 PyRQA
 pandas
 mne
-
+plotly
