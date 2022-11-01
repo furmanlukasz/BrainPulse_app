@@ -12,7 +12,7 @@ from .event import EventSegment
 from sklearn.impute import SimpleImputer
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import QuantileTransformer
-from IPython.display import HTML, Audio, Video, Javascript
+
 sns.set_style("whitegrid")
 
 # plt.rcParams["font.family"] = "cursive"
