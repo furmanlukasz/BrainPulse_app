@@ -5,5 +5,5 @@ umap-learn
 umap-learn[plot]
 PyRQA
 pandas
-
+mne
 
