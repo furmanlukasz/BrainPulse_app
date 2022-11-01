@@ -16,7 +16,10 @@ from BrainPulse import (dataset,
                         features_space,
                         plot)
 
+path = "./mne_data"
 
+os.makedirs(path, exist_ok = True)
+print("Directory '%s' created successfully" % path)
 
 def run_computation(t_start, t_end, selected_subject, fir_filter, electrode_name, cut_freq, win_len, n_fft, percentile, run_list):
     

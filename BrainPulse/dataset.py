@@ -7,15 +7,6 @@ import numpy as np
 import os
 import mne
 
-  
-# Path
-path = "/home/appuser/mne_data"
-
-try:
-    os.makedirs(path, exist_ok = True)
-    print("Directory '%s' created successfully" % path)
-except OSError as error:
-    print("Directory '%s' can not be created" % path)
 
 
 def eegbci_data(tmin, tmax, subject, filter_range = None, run_list = None):
@@ -24,7 +15,7 @@ def eegbci_data(tmin, tmax, subject, filter_range = None, run_list = None):
     runs = run_list  # open eyes vs closed eyes
 
     # raw_fnames = eegbci.load_data(subject, runs, path='./datasets', update_path=True)
-    raw_fnames = eegbci.load_data(subject, runs, os.getenv('HOME') + '/datasets')
+    raw_fnames = eegbci.load_data(subject, runs, update_path=True, path='../mne_data')
     raw = concatenate_raws([read_raw_edf(f, preload=True) for f in raw_fnames])
     eegbci.standardize(raw)  # set channel names
     montage = make_standard_montage('standard_1005')
