@@ -6,7 +6,7 @@ import scipy.io
 import numpy as np
 import os
 import mne
-# mne.utils.set_config('MNE_DATASETS_EEGBCI_PATH', './datasets')
+mne.utils.set_config('MNE_DATASETS_EEGBCI_PATH', True)
 
 def eegbci_data(tmin, tmax, subject, filter_range = None, run_list = None):
 
@@ -14,7 +14,7 @@ def eegbci_data(tmin, tmax, subject, filter_range = None, run_list = None):
     runs = run_list  # open eyes vs closed eyes
 
     # raw_fnames = eegbci.load_data(subject, runs, path='./datasets', update_path=True)
-    raw_fnames = eegbci.load_data(subject, runs, path='./datasets')
+    raw_fnames = eegbci.load_data(subject, runs, path='./datasets', update_path=True)
     raw = concatenate_raws([read_raw_edf(f, preload=True) for f in raw_fnames])
     eegbci.standardize(raw)  # set channel names
     montage = make_standard_montage('standard_1005')
