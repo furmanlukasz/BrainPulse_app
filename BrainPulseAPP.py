@@ -47,16 +47,17 @@ def run_computation(t_start, t_end, selected_subject, fir_filter, electrode_name
     electrode_open = epochs.get_data()[0][electrode_index]
     electrode_close = epochs.get_data()[1][electrode_index]
 
-    stft_open = vector_space.compute_stft((electrode_open),
+    stft_open = vector_space.compute_stft(electrode_open,
                                         n_fft=n_fft, win_len=win_len,
                                         s_rate=epochs.info['sfreq'],
                                         cut_freq=cut_freq)
 
-    stft_close = vector_space.compute_stft((electrode_close),
+    stft_close = vector_space.compute_stft(electrode_close,
                                         n_fft=n_fft, win_len=win_len,
                                         s_rate=epochs.info['sfreq'],
                                         cut_freq=cut_freq)
-
+    del raw
+    del electrode_open, electrode_close
     # matrix_open = distance_matrix.EuclideanPyRQA_RP_stft(stft_open)
     # matrix_close = distance_matrix.EuclideanPyRQA_RP_stft(stft_close)
     matrix_open = distance_matrix.EuclideanPyRQA_RP_stft_cpu(stft_open)
@@ -68,24 +69,25 @@ def run_computation(t_start, t_end, selected_subject, fir_filter, electrode_name
     matrix_open_binary = distance_matrix.set_epsilon(matrix_open,nbr_open)
     matrix_close_binary = distance_matrix.set_epsilon(matrix_close,nbr_close)
 
-    matrix_open_to_plot = matrix_open_binary
-    matrix_closed_to_plot = matrix_close_binary
+    del matrix_open, matrix_close
+    # matrix_open_to_plot = matrix_open_binary
+    # matrix_closed_to_plot = matrix_close_binary
 
     fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2,figsize=(16,8),dpi=200)
-    ax1.imshow(matrix_open_to_plot, cmap='Greys', origin='lower') #cividis
-    ax1.set_xticks(np.linspace(0, matrix_open_to_plot.shape[0] , ax1.get_xticks().shape[0]))
-    ax1.set_yticks(np.linspace(0, matrix_open_to_plot.shape[0] , ax1.get_xticks().shape[0]))
-    ax1.set_xticklabels([str(np.around(x,decimals=0)) for x in np.linspace(0, matrix_open_to_plot.shape[0] / s_rate, ax1.get_xticks().shape[0])])
-    ax1.set_yticklabels([str(np.around(x, decimals=0)) for x in np.linspace(0, matrix_open_to_plot.shape[0] / s_rate, ax1.get_yticks().shape[0])])
+    ax1.imshow(matrix_open_binary, cmap='Greys', origin='lower') #cividis
+    ax1.set_xticks(np.linspace(0, matrix_open_binary.shape[0] , ax1.get_xticks().shape[0]))
+    ax1.set_yticks(np.linspace(0, matrix_open_binary.shape[0] , ax1.get_xticks().shape[0]))
+    ax1.set_xticklabels([str(np.around(x,decimals=0)) for x in np.linspace(0, matrix_open_binary.shape[0] / s_rate, ax1.get_xticks().shape[0])])
+    ax1.set_yticklabels([str(np.around(x, decimals=0)) for x in np.linspace(0, matrix_open_binary.shape[0] / s_rate, ax1.get_yticks().shape[0])])
     ax1.set_title(options[0]+' window size = 240 samples, ε = '+str(np.round(nbr_open,4)))
     ax1.set_xlabel('time (s)')
     ax1.set_ylabel('time (s)')
 
-    ax2.imshow(matrix_closed_to_plot, cmap='Greys', origin='lower')
-    ax2.set_xticks(np.linspace(0, matrix_closed_to_plot.shape[0] , ax1.get_xticks().shape[0]))
-    ax2.set_yticks(np.linspace(0, matrix_closed_to_plot.shape[0] , ax1.get_xticks().shape[0]))
-    ax2.set_xticklabels([str(np.around(x,decimals=0)) for x in np.linspace(0, matrix_closed_to_plot.shape[0] / s_rate, ax1.get_xticks().shape[0])])
-    ax2.set_yticklabels([str(np.around(x, decimals=0)) for x in np.linspace(0, matrix_closed_to_plot.shape[0] / s_rate, ax2.get_yticks().shape[0])])
+    ax2.imshow(matrix_close_binary, cmap='Greys', origin='lower')
+    ax2.set_xticks(np.linspace(0, matrix_close_binary.shape[0] , ax1.get_xticks().shape[0]))
+    ax2.set_yticks(np.linspace(0, matrix_close_binary.shape[0] , ax1.get_xticks().shape[0]))
+    ax2.set_xticklabels([str(np.around(x,decimals=0)) for x in np.linspace(0, matrix_close_binary.shape[0] / s_rate, ax1.get_xticks().shape[0])])
+    ax2.set_yticklabels([str(np.around(x, decimals=0)) for x in np.linspace(0, matrix_close_binary.shape[0] / s_rate, ax2.get_yticks().shape[0])])
     ax2.set_title(options[1]+' window size = 240 samples, ε = '+str(np.round(nbr_close,4)))
     ax2.set_xlabel('time (s)')
     ax2.set_ylabel('time (s)')

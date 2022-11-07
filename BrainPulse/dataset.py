@@ -36,7 +36,7 @@ def eegbci_data(tmin, tmax, subject, filter_range = None, run_list = None):
     # Read epochs
     epochs = Epochs(raw, events, event_id, tmin, tmax, proj=True, picks=picks,
                     baseline=None, preload=True)
-    print(epochs.get_data())
+    # print(epochs.get_data())
     return epochs, raw
 
 
