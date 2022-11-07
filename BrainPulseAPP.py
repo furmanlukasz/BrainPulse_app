@@ -201,26 +201,26 @@ electrode_name = sidebar.selectbox(
 
 t_start, t_end = sidebar.slider(
     'Select a time range in seconds',
-    0.0, 60.0, (0.0, 30.0))
+    0, 60, (0, 30), step=1)
 
 f1, f2 = sidebar.slider(
     'Select a FIR filter range',
-    0.0, 60.0, (2.0, 50.0))
+    0, 60, (2, 50), step=1)
 fir_filter = [f1, f2]
 
 cut_freq = f2
 
-win_len = sidebar.slider('FFT window size', 0, 512, 170)
+win_len = sidebar.slider('FFT window size', 0, 512, 170, step=1)
 
-n_fft = sidebar.slider('numer of FFT bins', 0, 1024, 512)
+n_fft = sidebar.slider('numer of FFT bins', 0, 1024, 512, step=1)
 
-min_vert_line_len = sidebar.slider('Minimum  vertical line length', 0, 250, 2) 
+min_vert_line_len = sidebar.slider('Minimum  vertical line length', 0, 250, 2, step=1)
 
-min_diagonal_line_len = sidebar.slider('Minimum diagonal line length', 0, 250, 2) 
+min_diagonal_line_len = sidebar.slider('Minimum diagonal line length', 0, 250, 2, step=1)
 
-min_white_vert_line_len = sidebar.slider('Minimum white vertical line length', 0, 250, 2)
+min_white_vert_line_len = sidebar.slider('Minimum white vertical line length', 0, 250, 2, step=1)
 
-percentile = sidebar.slider('Precentile', 0, 100, 24) 
+percentile = sidebar.slider('Precentile', 0, 100, 24, step=1)
 
 sidebar.download_button('Download file', download(),file_name='archive.zip')
 
