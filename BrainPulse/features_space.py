@@ -12,7 +12,7 @@ from sklearn.feature_selection import RFECV
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 
-import rcr
+# import rcr
 
 def save_features_as_csv():
     return
@@ -71,7 +71,8 @@ def select_features_clean_and_normalize(df,features=['Lentr', 'TT', 'L', 'LAM', 
     #rcr
     stats_data_cleaned=np.empty((stats_data.shape[0],stats_data.shape[1]))
     stats_data_cleaned[:]=np.nan
-    r = rcr.RCR(rcr.SS_MEDIAN_DL)
+    # r = rcr.RCR(rcr.SS_MEDIAN_DL)
+    r = stats_data_cleaned
 
     for ii in range(stats_data.shape[1]):
         # fig, (ax1, ax2) = plt.subplots(nrows=1, ncols=2,figsize=(16,8),dpi=200)

@@ -7,4 +7,4 @@ PyRQA
 pandas
 mne
 plotly
-rcr
+streamlit

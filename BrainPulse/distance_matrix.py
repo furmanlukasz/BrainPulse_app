@@ -1,5 +1,5 @@
 from numba import jit
-from pynndescent.distances import wasserstein_1d, spearmanr
+from pynndescent.distances import wasserstein_1d, spearmanr, euclidean
 import numpy as np
 from pyrqa.computation import RPComputation
 from pyrqa.time_series import TimeSeries, EmbeddedSeries
@@ -15,6 +15,16 @@ import torch
 #
 # @jit(parallel=True)
 @jit(nopython=True)
+def EuclideanPyRQA_RP_stft_cpu(stft_):
+    result = np.zeros((stft_.shape[0], stft_.shape[0]))
+
+    for i, fft in enumerate(stft_):
+        for j, v in enumerate(stft_):
+            d = euclidean(fft, v)
+            result[i, j] = d
+    return result
+
+@jit(nopython=True)
 def wasserstein_squereform(stft_):
     result = np.zeros((stft_.shape[0], stft_.shape[0]))
 
@@ -23,7 +33,6 @@ def wasserstein_squereform(stft_):
             d = wasserstein_1d(fft, v)
             result[i, j] = d
     return result
-
 
 @jit(nopython=True)
 def spearmanr_squereform(stft_):
