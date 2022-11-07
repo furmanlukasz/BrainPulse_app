@@ -223,18 +223,22 @@ percentile = sidebar.slider('Precentile', 0, 100, 24)
 sidebar.download_button('Download file', download(),file_name='archive.zip')
 
 # ---------------Plot RPs--------------------
-runs_ = ['Baseline open eyes', 'Baseline closed eyes', 'Motor execution: left vs right hand', 'Motor imagery: left vs right hand',
-    'Motor execution: hands vs feet', 'Motor imagery: hands vs feet']
+# runs_ = ['Baseline open eyes', 'Baseline closed eyes', 'Motor execution: left vs right hand', 'Motor imagery: left vs right hand',
+#     'Motor execution: hands vs feet', 'Motor imagery: hands vs feet']
+#
+# options = st.multiselect('Select two runs to compare', runs_, ['Baseline open eyes', 'Baseline closed eyes'])
 
-options = st.multiselect('Select two runs to compare', runs_, ['Baseline open eyes', 'Baseline closed eyes'])
 
-run_list = []
+# run_list = []
+#
+# for v in options:
+#     run_list.append(runs_.index(v)+1)
+# if len(run_list) <= 1:
+#     run_list = [1,2]
+st.markdown('Baseline open eyes vs Baseline closed eyes')
+options = ['Baseline open eyes', 'Baseline closed eyes']
+run_list = [1,2]
 
-for v in options:
-    run_list.append(runs_.index(v)+1)
-if len(run_list) <= 1:
-    run_list = [1,2]
-    
 rp_plot, matrix_open_binary, matrix_close_binary, epochs, stft1, stft2  = run_computation(t_start, t_end, selected_subject, fir_filter, electrode_name, cut_freq, win_len, n_fft, percentile, run_list,options)
 st.write(rp_plot)
 
