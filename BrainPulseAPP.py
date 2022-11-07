@@ -17,8 +17,17 @@ from BrainPulse import (dataset,
                         features_space,
                         plot)
 
-# RUN git clone https://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@github.com/furmanlukasz/BrainPulse.git
-# ENTRYPOINT [ "python" ]
+# path
+path = "./mne_data"
+path2 = "./RPs"
+
+# Remove the specified
+# file path
+try:
+    os.remove(path)
+    print("% s removed successfully" % path)
+except:
+    pass
 
 path = "./mne_data"
 os.makedirs(path, exist_ok = True)
